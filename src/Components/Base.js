@@ -31,7 +31,7 @@ export default function Base() {
     
 
     const nextPage = () => {
-        if (totalPages>1){
+        if (page<totalPages){
             setPage(page+1);
             setURL(`${baseURL}${page+1}`);
         }

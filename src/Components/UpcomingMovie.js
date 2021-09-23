@@ -1,9 +1,9 @@
-import React,{useEffect, useState, useContext} from 'react'
+import React,{useEffect, useState} from 'react'
 import axios from 'axios'
 
 import Post from './Post';
 import DetailMovie from './DetailMovie';
-
+import PageNavbar from './PageNavbar';
 
 const API_Key = "1928eb3e6da4e780ca9119f98a6ec513";
 
@@ -11,18 +11,36 @@ const baseURL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_Key}&
 
 export default function UpcomingMovie() {
     const [upcomingMovie, setUpcomingMovie] = useState([]);
-  //  const [watchList, setWatchList] = useContext(WatchListContext);
     const [url, setURL] = useState (()=>`${baseURL}1`);
+    const [page, setPage] = useState (()=>1);
+    const [totalPages, setTotalPages] = useState(()=>1);
+
+    const nextPage = () => {
+        if (page<totalPages) {
+            setPage(prev=>(prev+1));
+            setURL(`${baseURL}${page+1}`);
+        }
+    }
+
+    const prevPage = () => {
+        if (page>1){
+            setPage(prev=>(prev-1));
+            setURL(`${baseURL}${page-1}`);
+        }
+    }
+
+    useEffect (()=>{
+        axios.get(url).then((response)=>{setUpcomingMovie(response.data.results)});
+    },[url]);
 
     useEffect(()=>{
-        //axios.get(url).then((response)=>setTotalPages(response.data.total_pages));
+        axios.get(url).then((response)=>setTotalPages(response.data.total_pages));
         axios.get(url).then((response)=>{setUpcomingMovie(response.data.results)});
-        console.log(upcomingMovie);
-        console.log(url);
     },[]);
 
     return (
         <div>
+            <PageNavbar onClickNextPage={nextPage} onClickPrevPage={prevPage} pageNumber={page} />
             <h1>Upcoming Movies</h1>
             <div className="container overflow-hidden pt-5">
             <div className="row">
