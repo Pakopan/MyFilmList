@@ -4,6 +4,7 @@ import axios from 'axios'
 import Post from './Post';
 import { WatchListContext } from '../WatchListContext';
 import WatchList from './WatchList';
+import PageNavbar from './PageNavbar';
 
 const API_Key = "1928eb3e6da4e780ca9119f98a6ec513";
 const session_id = "de0dd5cc04b5390af28c4db2fd4a63586c9088e4";
@@ -69,26 +70,7 @@ export default function Base() {
 
     return (
         <div>
-            <div className="card bg-warning" 
-                style={{width: "5rem", 
-                        position:"fixed", 
-                        zIndex:"1",
-                        top: "40%",
-                        left: "93%"
-                        }}>
-                    <h5 className="card-header">Page</h5>
-                    <div className="card-body">
-                        <h1>{page}</h1>
-                        <div className="row d-flex">
-                            <div>
-                                <button className="btn btn-dark btn-sm" onClick={prevPage}>Back</button>
-                            </div>
-                            <div className="pt-2">
-                            <button className="btn btn-dark btn-sm" onClick={nextPage}>Next</button>
-                            </div>
-                        </div>
-                    </div>
-            </div>
+            <PageNavbar onClickNextPage={nextPage} onClickPrevPage={prevPage} pageNumber={page}/>
             <div className="row d-flex" style={{position:"relative"}}>
                 <div className="col-3 text-black bg-light" style={{position:"absolute", top:"5vw"}}>
                     <h1 style={{textTransform:"uppercase"}}>{titleBackdrop}</h1>

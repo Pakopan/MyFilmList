@@ -4,16 +4,10 @@ import axios from 'axios'
 import Post from './Post';
 import DetailMovie from './DetailMovie';
 
-import { WatchListContext } from '../WatchListContext';
-import WatchList from './WatchList';
 
 const API_Key = "1928eb3e6da4e780ca9119f98a6ec513";
-const session_id = "de0dd5cc04b5390af28c4db2fd4a63586c9088e4";
-const account_id = "11148819";
 
 const baseURL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_Key}&language=en-US&page=`;
-//const watchListPostURL = `https://api.themoviedb.org/3/account/${account_id}/watchlist?api_key=${API_Key}&session_id=${session_id}`
-//const watchListURL = `https://api.themoviedb.org/3/account/${account_id}/watchlist/movies?api_key=${API_Key}&session_id=${session_id}&language=en-US&sort_by=created_at.asc&page=1`
 
 export default function UpcomingMovie() {
     const [upcomingMovie, setUpcomingMovie] = useState([]);
@@ -29,7 +23,7 @@ export default function UpcomingMovie() {
 
     return (
         <div>
-            <h1>This is upcoming movies page</h1>
+            <h1>Upcoming Movies</h1>
             <div className="container overflow-hidden pt-5">
             <div className="row">
             {upcomingMovie.map((um)=>(
