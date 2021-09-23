@@ -2,7 +2,6 @@ import React,{useEffect, useState, useContext} from 'react'
 import axios from 'axios'
 
 import Post from './Post';
-import Header from './Header';
 import { WatchListContext } from '../WatchListContext';
 import WatchList from './WatchList';
 
@@ -85,7 +84,6 @@ export default function Base() {
                         </div>
                     </div>
             </div>
-            <Header/>
             <hr></hr>
             <div className="container overflow-hidden">
                 <div className="row g-5">
