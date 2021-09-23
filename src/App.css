@@ -36,3 +36,8 @@
   top: 1%;
   left: 75%;
 }
+
+.backdrop {
+  height: 20vw;
+  object-fit: cover;
+}

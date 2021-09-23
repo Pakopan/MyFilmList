@@ -20,6 +20,9 @@ export default function Base() {
     const [totalPages, setTotalPages] = useState (1);
     const [watchList] = useContext(WatchListContext);
 
+    const [backDrop, setBackdrop] = useState ("");
+    const [titleBackdrop, setTitleBackdrop] = useState("");
+
     const [watchListTotal, setWatchListTotal] = useState([]);
     
     const [addedWatchListStatus, setAddedWatchListStatus] = useState([]);
@@ -38,11 +41,13 @@ export default function Base() {
             setURL(`${baseURL}${page-1}`);
         }
     }
-
     useEffect(()=>{
         axios.get(url).then((response)=>setTotalPages(response.data.total_pages));
         axios.get(url).then((response)=>{setPost(response.data.results)});
+        axios.get(url).then((response)=>{setBackdrop(response.data.results[0].backdrop_path)});
+        axios.get(url).then((response)=>{setTitleBackdrop(response.data.results[0].title)});
     },[url]);
+
 
     useEffect(()=>{
         if (watchList>0){
@@ -83,6 +88,12 @@ export default function Base() {
                             </div>
                         </div>
                     </div>
+            </div>
+            <div className="row d-flex" style={{position:"relative"}}>
+                <div className="col-3 text-black bg-light" style={{position:"absolute", top:"5vw"}}>
+                    <h1 style={{textTransform:"uppercase"}}>{titleBackdrop}</h1>
+                    </div>
+                 <img className="backdrop" src={`https://image.tmdb.org/t/p/w500/${backDrop}`} alt="" />
             </div>
             <hr></hr>
             <div className="container overflow-hidden">
