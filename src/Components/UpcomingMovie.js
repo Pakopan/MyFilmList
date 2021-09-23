@@ -54,7 +54,7 @@ export default function UpcomingMovie() {
                         overview_visibility={false}/>
                     </div>
                     <div className="col-6 align-self-start">
-                        <DetailMovie overview={um.overview} release_date={um.release_date} />
+                        <DetailMovie overview={um.overview} release_date={um.release_date} vote_average={um.vote_average}/>
                     </div>
                 </div>
                 </div>

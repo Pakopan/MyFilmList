@@ -5,6 +5,7 @@ import Post from './Post';
 import { WatchListContext } from '../WatchListContext';
 import WatchList from './WatchList';
 import PageNavbar from './PageNavbar';
+import CstmTab from './CstmTab';
 
 const API_Key = "1928eb3e6da4e780ca9119f98a6ec513";
 const session_id = "de0dd5cc04b5390af28c4db2fd4a63586c9088e4";
@@ -29,6 +30,19 @@ export default function Base() {
     const [addedWatchListStatus, setAddedWatchListStatus] = useState([]);
     const [updatedWatchListStatus, setUpdatedWatchListStatus] = useState ([]);
     
+    const popularMovieContent = 
+                                post.map(p=>(
+                                    <div className="col-4 pt-4">
+                                        <Post title={p.title}
+                                        popularity={p.popularity}
+                                        release_date={p.release_date}
+                                        overview={p.overview}
+                                        vote_average={p.vote_average}
+                                        poster_path={p.poster_path}
+                                        movie={p}
+                                        />
+                                    </div>
+                                ));
 
     const nextPage = () => {
         if (page<totalPages){
@@ -82,7 +96,7 @@ export default function Base() {
                 <div className="row g-5">
                     <div className="col-4">
                         <h1>Watchlist</h1>
-                        {watchListTotal.map(w=>(
+                     {watchListTotal.map(w=>(
                             <WatchList title={w.title} 
                                 release_date={w.release_date} 
                                 poster_path={w.poster_path}
@@ -96,21 +110,8 @@ export default function Base() {
                         ))}
                     </div>
                     <div className="col-8">
-                        <h1>POPULER HARI INI</h1>
-                        <div className="row">
-                        {post.map(p=>(
-                        <div className="col-4">
-                            <Post title={p.title}
-                            popularity={p.popularity}
-                            release_date={p.release_date}
-                            overview={p.overview}
-                            vote_average={p.vote_average}
-                            poster_path={p.poster_path}
-                            movie={p}
-                            />
-                        </div>
-                ))}
-                        </div>
+                        <CstmTab firstTabLabel="Popular Today" secondTabLabel="Top Movie"
+                        contentTab1={popularMovieContent}/>
                     </div>
                 </div> 
                 <div className="row pt-5">

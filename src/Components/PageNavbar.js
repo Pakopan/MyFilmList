@@ -3,7 +3,7 @@ import React from 'react'
 export default function PageNavbar({pageNumber, onClickNextPage, onClickPrevPage}) {
     return (
         <div>
-            <div className="card bg-warning" 
+            <div className="card bg-warning shadow" 
                 style={{width: "5rem", 
                         position:"fixed", 
                         zIndex:"1",
