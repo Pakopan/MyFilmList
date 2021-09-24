@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink} from 'reactstrap';
 import classnames from 'classnames';
 
-export default function CstmTab({firstTabLabel, secondTabLabel, contentTab1}) {
-    const [activeTab, setActiveTab] = useState('1');
+export default function CstmTab({activeTab, toggle, firstTabLabel, secondTabLabel, contentTab1="", contentTab2=""}) {
+  
 
-    const toggle = tab => {
-      if(activeTab !== tab) setActiveTab(tab);
-    }
   
     return (
         <div>
@@ -33,10 +30,12 @@ export default function CstmTab({firstTabLabel, secondTabLabel, contentTab1}) {
           <TabPane tabId="1">
               <div className="row">
                 {contentTab1}
-                </div>
+              </div>
           </TabPane>
           <TabPane tabId="2">
-            <h1>ini kosong</h1>
+            <div className="row">
+                {contentTab2}
+              </div>
           </TabPane>
         </TabContent>
       </div>

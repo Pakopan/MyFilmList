@@ -1,10 +1,12 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import axios from 'axios';
+import { WatchListContext } from '../WatchListContext';
 
 export default function WatchList({title, release_date,poster_path, 
                                 movie, watchListTotal, setWatchListTotal, updatedWatchListStatus, 
                                 setupdatedWatchListStatus,watchListPostURL}) 
     {
+    const [watchList, setWatchList] = useContext(WatchListContext);
     const deleteWatchList = () => {
         axios.post(watchListPostURL,
             {
@@ -15,6 +17,7 @@ export default function WatchList({title, release_date,poster_path,
         ).then(response=>{
             setupdatedWatchListStatus(a=>[...a,response.data]);
         });
+        setWatchList(watchList.filter((wl)=>(wl.id !== movie.id)));
     }
     return (
         <div className="row p-3 border shadow bg-light rounded">
