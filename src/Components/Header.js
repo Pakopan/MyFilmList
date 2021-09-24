@@ -7,14 +7,8 @@ export default function Header() {
     const [keyword, setKeyword] = useState("");
     const [searchValue, setSearchValue] = useContext(SearchBarContext);
 
-    const updateKeyword = (event) => {
-        setKeyword(event.target.value);
-    }
-
-    const updateSearchValue = () => {
-        setSearchValue(keyword);
-        console.log(searchValue);
-    }
+    const updateKeyword = (event) => setKeyword(event.target.value);
+    const updateSearchValue = () => setSearchValue(keyword);
 
     return (
            <div className="card">
@@ -27,7 +21,7 @@ export default function Header() {
                         <form className="d-flex">
                             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" 
                                 value={keyword} onChange={updateKeyword}/>
-                            <Link to="/search-results">
+                            <Link to={keyword===""?"/":"/search-results"}>
                                 <button className="btn btn-outline-light" type="submit" onClick={updateSearchValue}>Search</button>
                             </Link>
                         </form>

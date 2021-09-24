@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function PageNavbar({pageNumber, onClickNextPage, onClickPrevPage}) {
+export default function PageNavbar({pageNumber, onClickNextPage, onClickPrevPage, pageTotal}) {
     return (
         <div>
             <div className="card bg-warning shadow" 
@@ -13,6 +13,7 @@ export default function PageNavbar({pageNumber, onClickNextPage, onClickPrevPage
                     <h5 className="card-header">Page</h5>
                     <div className="card-body">
                         <h1>{pageNumber}</h1>
+                        <p>of {pageTotal}</p>
                         <div className="row d-flex">
                             <div>
                                 <button className="btn btn-dark btn-sm" onClick={onClickPrevPage}>Back</button>

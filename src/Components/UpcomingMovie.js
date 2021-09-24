@@ -40,7 +40,7 @@ export default function UpcomingMovie() {
 
     return (
         <div>
-            <PageNavbar onClickNextPage={nextPage} onClickPrevPage={prevPage} pageNumber={page} />
+            <PageNavbar onClickNextPage={nextPage} onClickPrevPage={prevPage} pageNumber={page} pageTotal={totalPages}/>
             <h1>Upcoming Movies</h1>
             <div className="container overflow-hidden pt-5">
             <div className="row">

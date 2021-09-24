@@ -84,7 +84,7 @@ export default function Base() {
 
     return (
         <div>
-            <PageNavbar onClickNextPage={nextPage} onClickPrevPage={prevPage} pageNumber={page}/>
+            <PageNavbar onClickNextPage={nextPage} onClickPrevPage={prevPage} pageNumber={page} pageTotal={totalPages}/>
             <div className="row d-flex" style={{position:"relative"}}>
                 <div className="col-3 text-black bg-light" style={{position:"absolute", top:"5vw"}}>
                     <h1 style={{textTransform:"uppercase"}}>{titleBackdrop}</h1>
