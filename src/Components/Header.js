@@ -12,7 +12,7 @@ export default function Header() {
 
     return (
            <div className="card">
-                <div className="row card-body d-flex mx-0 "
+                <div className="row card-body d-flex mx-0"
                     style={{backgroundImage: "linear-gradient(-20deg, #fc6076 0%, #ff9a44 100%)"}}>
                     <div className="col-7 align-self-center">
                         <CstmNavbar/>

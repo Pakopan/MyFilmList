@@ -1,6 +1,7 @@
 import React from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink} from 'reactstrap';
 import classnames from 'classnames';
+import { Button } from 'reactstrap';
 
 export default function CstmTab({activeTab, toggle, firstTabLabel, secondTabLabel, contentTab1="", contentTab2=""}) {
   
@@ -10,23 +11,22 @@ export default function CstmTab({activeTab, toggle, firstTabLabel, secondTabLabe
         <div>
         <Nav tabs>
           <NavItem>
-            <NavLink
-              className={`${classnames({ active: activeTab === '1' })} bg-light`}
-              onClick={() => { toggle('1'); }}
-            >
+            <Button color={`${activeTab==="1"?"dark":"white"} `}
+              className={`${classnames({ active: activeTab === '1' })} border border-dark`}
+              onClick={() => { toggle('1'); }}>
               <h1>{firstTabLabel}</h1>
-            </NavLink>
+            </Button>
           </NavItem>
           <NavItem>
-            <NavLink
-              className={classnames({ active: activeTab === '2' })}
+            <Button color={`${activeTab==="2"?"dark":"white"}`}
+              className={`${classnames({ active: activeTab === '2' })} border border-dark`}
               onClick={() => { toggle('2'); }}
             >
               <h1>{secondTabLabel}</h1>
-            </NavLink>
+            </Button>
           </NavItem>
         </Nav>
-        <TabContent activeTab={activeTab}>
+        <TabContent activeTab={activeTab} className="border border-dark">
           <TabPane tabId="1">
               <div className="row">
                 {contentTab1}

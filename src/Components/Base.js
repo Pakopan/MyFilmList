@@ -137,13 +137,13 @@ export default function Base() {
                     setAddedWatchListStatus(a=>[...a,response.data]);
                 })
             ));
-            setLoading(false);
+            setLoading(true);
         }
     },[watchList]);
 
     useEffect(()=>{
         axios.get(watchListURL).then((response)=>setWatchListTotal(response.data.results));
-        setLoading(true);
+        setLoading(false);
     },[addedWatchListStatus, updatedWatchListStatus]);
 
     return (
@@ -174,7 +174,8 @@ export default function Base() {
                                 />
                         ))}
                         <div className = "p-5">
-                            <Spinner className={loading?"d-none":""} color="primary" children="" />
+                            <Spinner className={loading?"":"d-none"} style={{ width: '3rem', height: '3rem' }} 
+                                color="primary" children=""/>
                         </div>
                     </div>
                     <div className="col-8">
