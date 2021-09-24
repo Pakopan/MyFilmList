@@ -1,5 +1,4 @@
 import React from 'react'
-import { Justify } from 'react-bootstrap-icons'
 import {StarFill} from 'react-bootstrap-icons';
 
 export default function DetailMovie({overview, release_date, vote_average}) {

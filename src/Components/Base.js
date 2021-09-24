@@ -89,7 +89,7 @@ export default function Base() {
                 <div className="col-3 text-black bg-light" style={{position:"absolute", top:"5vw"}}>
                     <h1 style={{textTransform:"uppercase"}}>{titleBackdrop}</h1>
                     </div>
-                 <img className="backdrop" src={`https://image.tmdb.org/t/p/w500/${backDrop}`} alt="" />
+                 <img className="backdrop" src={`https://image.tmdb.org/t/p/original/${backDrop}`} alt="" />
             </div>
             <hr></hr>
             <div className="container overflow-hidden">
