@@ -7,8 +7,8 @@ export default function PageNavbar({pageNumber, onClickNextPage, onClickPrevPage
                 style={{width: "5rem", 
                         position:"fixed", 
                         zIndex:"1",
-                        top: "40%",
-                        left: "93%"
+                        top: "60%",
+                        left: "3%"
                         }}>
                     <h5 className="card-header">Page</h5>
                     <div className="card-body">

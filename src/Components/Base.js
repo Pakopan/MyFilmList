@@ -7,6 +7,7 @@ import WatchList from './WatchList';
 import PageNavbar from './PageNavbar';
 import CstmTab from './CstmTab';
 import { Spinner } from 'reactstrap';
+import { Textfit } from 'react-textfit';
 
 const API_Key = "1928eb3e6da4e780ca9119f98a6ec513";
 const session_id = "de0dd5cc04b5390af28c4db2fd4a63586c9088e4";
@@ -146,20 +147,38 @@ export default function Base() {
         setLoading(false);
     },[addedWatchListStatus, updatedWatchListStatus]);
 
+    //styling------------------------------------
+    const backdropStyle = {
+            height: "100%",
+            width: "100%"
+    }
+    //----------------------------end of styling
+
     return (
-        <div>
+        <div className="row p-0 m-0">
             <PageNavbar onClickNextPage={nextPage} onClickPrevPage={prevPage} pageNumber={activeTab==="1"?page:pageTopPost}
                     pageTotal={activeTab==="1"?totalPages:totalPagesTopPost}/>
-            <div className="row d-flex" style={{position:"relative"}}>
-                <div className="col-3 text-black bg-light" style={{position:"absolute", top:"5vw"}}>
-                    <h1 style={{textTransform:"uppercase"}}>{titleBackdrop}</h1>
+            
+                <div className="col-8" style={{backgroundImage: "linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)", height:"38vw"}}>
+                 <img style={backdropStyle}  className="shadow-lg" src={`https://image.tmdb.org/t/p/original/${backDrop}`} alt="" />
+                </div>
+                <div className="col-4 px-5" style={{backgroundImage: "linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)",color:"white", height:"38vw"}}>
+                    <div className="align-self-center">
+                        <br></br>
+                    <h1 style={{textTransform:"uppercase", letterSpacing:"1vw", }}> <Textfit mode="multi"> {titleBackdrop} </Textfit></h1>
+                    <hr></hr>
+                    <Textfit mode="multi">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        when an unknown printer took a galley of type and scrambled it to make a type 
+                        specimen book. It has survived not only five centuries, but also the leap into 
+                        electronic typesetting, remaining essentially unchanged. It was popularised in 
+                        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+                        and more recently with desktop publishing software like Aldus PageMaker 
+                        including versions of Lorem Ipsum.</Textfit>
                     </div>
-                 <img className="backdrop" src={`https://image.tmdb.org/t/p/original/${backDrop}`} alt="" />
-            </div>
-            <hr></hr>
-            <div className="container overflow-hidden">
-                <div className="row g-5">
-                    <div className="col-4">
+                </div>
+            <div className="row p-5">
+                    <div className="col-4 px-5">
                         <h1>Watchlist</h1>
                      {watchListTotal.map(w=>(
                             <WatchList title={w.title} 
@@ -178,20 +197,11 @@ export default function Base() {
                                 color="primary" children=""/>
                         </div>
                     </div>
-                    <div className="col-8">
+                    <div className="col-8 px-5">
                         <CstmTab activeTab={activeTab} toggle={toggle}
                         firstTabLabel="Popular Today" secondTabLabel="Top Movie"
                         contentTab1={popularMovieContent} contentTab2={topMovieContent}/>
                     </div>
-                </div> 
-                <div className="row pt-5">
-                    <div className="col">
-                    <h1>Insert something cool here</h1>
-                    </div>
-                    <div className="col">
-                       <h1>Insert something cool here</h1>
-                    </div>
-                </div>    
             </div>
         </div>
     );

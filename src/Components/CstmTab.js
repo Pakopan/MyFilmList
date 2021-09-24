@@ -1,32 +1,41 @@
 import React from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink} from 'reactstrap';
 import classnames from 'classnames';
-import { Button } from 'reactstrap';
 
 export default function CstmTab({activeTab, toggle, firstTabLabel, secondTabLabel, contentTab1="", contentTab2=""}) {
   
+  const changeStyle = (tab_number) => {
+    if (activeTab===tab_number) {
+      return "";
+    }
+    else return "text-muted bg-light"
+    
+  }
 
+  const NavLinkStyle ={
+    userSelect:"none",
+    cursor:"pointer",
+  }
   
     return (
         <div>
         <Nav tabs>
           <NavItem>
-            <Button color={`${activeTab==="1"?"dark":"white"} `}
-              className={`${classnames({ active: activeTab === '1' })} border border-dark`}
+            <NavLink style={NavLinkStyle}
+              className={`${classnames({ active: activeTab === '1' })} ${changeStyle("1")}`}
               onClick={() => { toggle('1'); }}>
               <h1>{firstTabLabel}</h1>
-            </Button>
+            </NavLink>
           </NavItem>
           <NavItem>
-            <Button color={`${activeTab==="2"?"dark":"white"}`}
-              className={`${classnames({ active: activeTab === '2' })} border border-dark`}
-              onClick={() => { toggle('2'); }}
-            >
+            <NavLink style={NavLinkStyle}
+              className={`${classnames({ active: activeTab === '2' })} ${changeStyle("2")}`}
+              onClick={() => { toggle('2'); }}>
               <h1>{secondTabLabel}</h1>
-            </Button>
+            </NavLink>
           </NavItem>
         </Nav>
-        <TabContent activeTab={activeTab} className="border border-dark">
+        <TabContent activeTab={activeTab}>
           <TabPane tabId="1">
               <div className="row">
                 {contentTab1}
