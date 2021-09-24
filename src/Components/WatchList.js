@@ -17,7 +17,7 @@ export default function WatchList({title, release_date,poster_path,
         ).then(response=>{
             setupdatedWatchListStatus(a=>[...a,response.data]);
         });
-        setWatchList(watchList.filter((wl)=>(wl.id !== movie.id)));
+        setWatchList(watchList.filter((wl)=>(wl !== movie.id)));
     }
     return (
         <div className="row p-3 border shadow bg-light rounded">

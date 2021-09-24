@@ -126,12 +126,12 @@ export default function Base() {
 
     useEffect(()=>{
         if (watchList!==[]){
-            watchList.map((WL)=>(
+            watchList.map((idwl)=>(
                 axios.post(watchListPostURL,
                     {
                         media_type: "movie",
-                        media_id : parseInt(WL.id),
-                        watchlist: WL.addToWatchList
+                        media_id : parseInt(idwl),
+                        watchlist: true
                     }
                 ).then(response=>{
                     setAddedWatchListStatus(a=>[...a,response.data]);
