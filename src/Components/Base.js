@@ -65,16 +65,18 @@ export default function Base() {
 
 
     useEffect(()=>{
-        if (watchList>0){
-            axios.post(watchListPostURL,
-                {
-                    media_type: "movie",
-                    media_id : parseInt(watchList),
-                    watchlist: true
-                }
-            ).then(response=>{
-                setAddedWatchListStatus(a=>[...a,response.data]);
-            });
+        if (watchList!==[]){
+            watchList.map((idWL)=>(
+                axios.post(watchListPostURL,
+                    {
+                        media_type: "movie",
+                        media_id : parseInt(idWL),
+                        watchlist: true
+                    }
+                ).then(response=>{
+                    setAddedWatchListStatus(a=>[...a,response.data]);
+                })
+            ));
         }
     },[watchList]);
 

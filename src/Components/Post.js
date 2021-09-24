@@ -8,7 +8,7 @@ export default function Post({title, popularity=0, release_date="", poster_path,
     const [sinopisFlag, setSinopsisFlag] = useState(false);
     const [, setWatchList] = useContext(WatchListContext);
     
-    const addToWatchList = () => setWatchList([movie.id]);
+    const addToWatchList = () => setWatchList(prev=>[...prev,[movie.id]]);
 
     let overview2=[...overview];   
 
