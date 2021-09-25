@@ -33,9 +33,11 @@ export default function CstmNavbar() {
                   <NavLink className="text-white">Upcoming Movie</NavLink>
                 </Link>
               </NavItem>
+              <Link to="/about">
               <NavItem>
                 <NavLink className="text-white">About Me</NavLink>
               </NavItem>
+              </Link>
             </Nav>
           </Collapse>
         </Navbar>
