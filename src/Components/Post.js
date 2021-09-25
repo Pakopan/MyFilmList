@@ -1,7 +1,6 @@
 import React,{useState, useContext} from 'react'
 import { Collapse } from 'reactstrap';
 import {StarFill} from 'react-bootstrap-icons';
-
 import { WatchListContext } from '../WatchListContext';
 
 export default function Post({title, popularity=0, release_date="", poster_path, overview="", vote_average=0, movie, overview_visibility=true}) {

@@ -1,5 +1,7 @@
 import React from 'react'
 import { UncontrolledCollapse, Card, CardBody, CardHeader, Button} from 'reactstrap';
+import { ArrowRightCircleFill } from 'react-bootstrap-icons';
+import { ArrowLeftCircleFill } from 'react-bootstrap-icons';
 export default function PageNavbar({pageNumber, onClickNextPage, onClickPrevPage, pageTotal}) {
     return (
             <div style={{width: "8vw", 
@@ -13,17 +15,16 @@ export default function PageNavbar({pageNumber, onClickNextPage, onClickPrevPage
                 </Button>
             <UncontrolledCollapse toggler="#toggler">
              <Card className="bg-warning">
-                            <CardHeader><h5>Page</h5></CardHeader>
-                    
                     <CardBody>
                         <h1>{pageNumber}</h1>
                         <p>of {pageTotal}</p>
-                        <div className="row d-flex">
-                            <div>
-                                <button className="btn btn-dark btn-sm" onClick={onClickPrevPage}>Back</button>
+                        <div className="row">
+                            <div className="col-6">
+                                <ArrowLeftCircleFill className="pageNav" onClick={onClickPrevPage} style={{cursor:"pointer"}}
+                                size={22} />
                             </div>
-                            <div className="pt-2">
-                            <button className="btn btn-dark btn-sm" onClick={onClickNextPage}>Next</button>
+                            <div className="col-6">
+                            <ArrowRightCircleFill className="pageNav" onClick={onClickNextPage} style={{cursor:"pointer"}} size={22}/>
                             </div>
                         </div>
                     </CardBody>
