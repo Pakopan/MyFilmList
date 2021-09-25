@@ -6,7 +6,7 @@ import { WatchListContext } from '../WatchListContext';
 import WatchList from './WatchList';
 import PageNavbar from './PageNavbar';
 import CstmTab from './CstmTab';
-import { Spinner } from 'reactstrap';
+import { Col, Spinner } from 'reactstrap';
 import { Textfit } from 'react-textfit';
 
 const API_Key = "1928eb3e6da4e780ca9119f98a6ec513";

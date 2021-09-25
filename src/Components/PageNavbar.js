@@ -1,17 +1,21 @@
 import React from 'react'
-
+import { UncontrolledCollapse, Card, CardBody, CardHeader, Button} from 'reactstrap';
 export default function PageNavbar({pageNumber, onClickNextPage, onClickPrevPage, pageTotal}) {
     return (
-        <div>
-            <div className="card bg-warning shadow" 
-                style={{width: "5rem", 
-                        position:"fixed", 
-                        zIndex:"1",
-                        top: "60%",
-                        left: "3%"
-                        }}>
-                    <h5 className="card-header">Page</h5>
-                    <div className="card-body">
+            <div style={{width: "8vw", 
+            position:"fixed", 
+            zIndex:"1",
+            top: "40%",
+            left: "3%"
+            }}>
+            <Button color="primary" id="toggler" className="shadow">
+                PAGE NAV
+                </Button>
+            <UncontrolledCollapse toggler="#toggler">
+             <Card className="bg-warning">
+                            <CardHeader><h5>Page</h5></CardHeader>
+                    
+                    <CardBody>
                         <h1>{pageNumber}</h1>
                         <p>of {pageTotal}</p>
                         <div className="row d-flex">
@@ -22,8 +26,9 @@ export default function PageNavbar({pageNumber, onClickNextPage, onClickPrevPage
                             <button className="btn btn-dark btn-sm" onClick={onClickNextPage}>Next</button>
                             </div>
                         </div>
-                    </div>
-            </div>            
+                    </CardBody>
+            </Card>       
+            </UncontrolledCollapse>
         </div>
     )
 }
