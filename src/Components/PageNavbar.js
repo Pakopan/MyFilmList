@@ -15,6 +15,7 @@ export default function PageNavbar({pageNumber, onClickNextPage, onClickPrevPage
                 </Button>
             <UncontrolledCollapse toggler="#toggler">
              <Card className="bg-warning">
+                    
                     <CardBody>
                         <h1>{pageNumber}</h1>
                         <p>of {pageTotal}</p>

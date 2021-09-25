@@ -37,9 +37,16 @@
   left: 75%;
 }
 
-
-
 .pageNav:hover {
   color: #f7f7f7;
   transition: 0.3s;
+}
+
+.iconSearchBar:hover {
+  color: #292b2c;
+  transition: 0.3s;
+}
+
+.iconSearchBar {
+  color:#f7f7f7;
 }

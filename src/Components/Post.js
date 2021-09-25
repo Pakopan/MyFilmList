@@ -27,11 +27,11 @@ export default function Post({title, popularity=0, release_date="", poster_path,
                             [...overview2.splice(0,430),"...(cont.)"]} </p>
                     </Collapse>
   
-                        <div className={`p-3 row ${overview_visibility?"":"d-none"}`}>
-                            <div className="col-6 align-self-center pt-2">
+                        <div className={`p-3 row ${overview_visibility?"":"d-none"} d-flex`}>
+                            <div className="col-6 align-self-start">
                                 <h4> <StarFill className="pb-1" color="orange" size={40}/>{vote_average}</h4>
                             </div>
-                            <div className="col-6 align-self-center ">
+                            <div className="col-6 align-self-start ">
                             <button onClick={()=>(setSinopsisFlag(!sinopisFlag))} type="button" 
                             className="btn btn-warning btn-sm">Sinopsis</button>
                         </div>

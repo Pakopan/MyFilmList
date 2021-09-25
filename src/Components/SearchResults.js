@@ -37,9 +37,9 @@ export default function SearchResults({input=""}) {
     return (
         <div>
             <PageNavbar pageNumber={page} onClickNextPage={nextPage} onClickPrevPage={prevPage} pageTotal={totalPages}/>
-            <h1>Hasil pencarian "{input}"</h1>
             <div className="container overflow-hidden">
-            <div className="row">
+            <div className="row" style={{paddingTop:"8vw"}}>
+            <h1 style={{paddingBottom:"2vw", paddingTop:"3vw"}}>Hasil pencarian "{input}"</h1>
             { searchResults.map(p=>(
                  <div className="col-3 pt-4">
                        <Post title={p.title}

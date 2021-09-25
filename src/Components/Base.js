@@ -35,6 +35,7 @@ export default function Base() {
 
     const [backDrop, setBackdrop] = useState ("");
     const [titleBackdrop, setTitleBackdrop] = useState("");
+    const [overviewBackdrop, setOverviewBackdrop] = useState("");
 
     const [watchListTotal, setWatchListTotal] = useState([]);
     
@@ -122,6 +123,7 @@ export default function Base() {
 
         axios.get(url).then((response)=>{setBackdrop(response.data.results[0].backdrop_path)});
         axios.get(url).then((response)=>{setTitleBackdrop(response.data.results[0].title)});
+        axios.get(url).then((response)=>{setOverviewBackdrop(response.data.results[0].overview)});
     },[url, urlTopPost]);
 
 
@@ -153,32 +155,29 @@ export default function Base() {
             width: "100%"
     }
     //----------------------------end of styling
-
     return (
         <div className="row p-0 m-0">
             <PageNavbar onClickNextPage={nextPage} onClickPrevPage={prevPage} pageNumber={activeTab==="1"?page:pageTopPost}
-                    pageTotal={activeTab==="1"?totalPages:totalPagesTopPost}/>
-            
+                    pageTotal={activeTab==="1"?totalPages:totalPagesTopPost}/>   
+            <div className="col">
+                <div className="row" style={{paddingTop:"8vw"}}>
                 <div className="col-8" style={{backgroundImage: "linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)", height:"38vw"}}>
-                 <img style={backdropStyle}  className="shadow-lg" src={`https://image.tmdb.org/t/p/original/${backDrop}`} alt="" />
+                    <img style={backdropStyle}  className="shadow-lg" src={`https://image.tmdb.org/t/p/original/${backDrop}`} alt="" />
                 </div>
-                <div className="col-4 px-5" style={{backgroundImage: "linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)",color:"white", height:"38vw"}}>
+                <div className="col-4 px-5 d-flex" style={{backgroundImage: "linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)",color:"white", height:"38vw"}}>
                     <div className="align-self-center">
                         <br></br>
-                    <h1 style={{textTransform:"uppercase", letterSpacing:"1vw", }}> <Textfit mode="multi"> {titleBackdrop} </Textfit></h1>
+                    <h1 style={{textTransform:"uppercase"}}> {titleBackdrop} </h1>
                     <hr></hr>
-                    <Textfit mode="multi">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                        when an unknown printer took a galley of type and scrambled it to make a type 
-                        specimen book. It has survived not only five centuries, but also the leap into 
-                        electronic typesetting, remaining essentially unchanged. It was popularised in 
-                        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-                        and more recently with desktop publishing software like Aldus PageMaker 
-                        including versions of Lorem Ipsum.</Textfit>
+                    <p>{overviewBackdrop.length>400?`${overviewBackdrop.slice(0,400)} ... (read more)`:overviewBackdrop}</p>
                     </div>
                 </div>
+                </div>
+            </div>
+                     
+
             <div className="row p-5">
-                    <div className="col-4 px-5">
+                    <div className="col-4" style={{paddingLeft:"5%", paddingRight:"5%"}}>
                         <h1>Watchlist</h1>
                      {watchListTotal.map(w=>(
                             <WatchList title={w.title} 
@@ -192,12 +191,8 @@ export default function Base() {
                                 watchListPostURL = {watchListPostURL}
                                 />
                         ))}
-                        <div className = "p-5">
-                            <Spinner className={loading?"":"d-none"} style={{ width: '3rem', height: '3rem' }} 
-                                color="primary" children=""/>
-                        </div>
                     </div>
-                    <div className="col-8 px-5">
+                    <div className="col-8" style={{paddingRight:"2%", paddingLeft:"0"}}>
                         <CstmTab activeTab={activeTab} toggle={toggle}
                         firstTabLabel="Popular Today" secondTabLabel="Top Movie"
                         contentTab1={popularMovieContent} contentTab2={topMovieContent}/>

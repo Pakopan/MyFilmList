@@ -7,12 +7,9 @@ import {
     Nav,
     NavItem,
     NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
   } from 'reactstrap';
   import { Link } from 'react-router-dom';
+  import { Film } from 'react-bootstrap-icons';
 
 export default function CstmNavbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +21,8 @@ export default function CstmNavbar() {
         <Navbar className="row" light expand="md">
           <NavbarBrand className="col-6">
             <Link style={{textDecoration:"none", color:"white"}} to="/">
-              <h1><b>MY MOVIE LIST</b></h1>
+              <h1><Film color="white" size={40}/><b> MY MOVIE LIST</b></h1>
+              
             </Link>
             </NavbarBrand>
           <NavbarToggler onClick={toggle} />

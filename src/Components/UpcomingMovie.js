@@ -41,9 +41,9 @@ export default function UpcomingMovie() {
     return (
         <div>
             <PageNavbar onClickNextPage={nextPage} onClickPrevPage={prevPage} pageNumber={page} pageTotal={totalPages}/>
-            <h1>Upcoming Movies</h1>
             <div className="container overflow-hidden pt-5">
-            <div className="row">
+            <div className="row" style={{paddingTop:"8vw"}}>
+            <h1 style={{paddingBottom:"3vw"}}>Upcoming Movies</h1>
             {upcomingMovie.map((um)=>(
                 <div className="col-6 pb-5">
                 <div className="row d-flex">

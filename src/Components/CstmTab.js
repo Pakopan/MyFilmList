@@ -19,7 +19,7 @@ export default function CstmTab({activeTab, toggle, firstTabLabel, secondTabLabe
   
     return (
         <div>
-        <Nav tabs>
+        <Nav tabs >
           <NavItem>
             <NavLink style={NavLinkStyle}
               className={`${classnames({ active: activeTab === '1' })} ${changeStyle("1")}`}
