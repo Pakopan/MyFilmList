@@ -6,6 +6,7 @@ import Base from './Base';
 import { SearchBarContext } from '../SearchBarContext';
 import SearchResults from './SearchResults';
 import About from './About';
+import PostDetail from './PostDetail';
 
 export default function AppChild() {
     const [searchValue] = useContext(SearchBarContext);
@@ -15,6 +16,7 @@ export default function AppChild() {
             <Route path="/upcoming" component={UpcomingMovie}/>
             <Route path="/search-results" component={() => <SearchResults input={searchValue} />}/>
             <Route path="/about" component={About}/>
+            <Route path="/movie/:id" component={PostDetail}/>
       </Switch>
     )
 }

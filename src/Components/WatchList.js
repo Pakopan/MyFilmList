@@ -3,8 +3,7 @@ import axios from 'axios';
 import { WatchListContext } from '../WatchListContext';
 
 export default function WatchList({title, release_date,poster_path, 
-                                movie, watchListTotal, setWatchListTotal, updatedWatchListStatus, 
-                                setupdatedWatchListStatus,watchListPostURL}) 
+                                movie,setupdatedWatchListStatus,watchListPostURL}) 
     {
     const [watchList, setWatchList] = useContext(WatchListContext);
     const deleteWatchList = () => {

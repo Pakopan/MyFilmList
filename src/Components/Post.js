@@ -2,8 +2,9 @@ import React,{useState, useContext} from 'react'
 import { Collapse } from 'reactstrap';
 import {StarFill} from 'react-bootstrap-icons';
 import { WatchListContext } from '../WatchListContext';
+import { Link } from 'react-router-dom';
 
-export default function Post({title, popularity=0, release_date="", poster_path, overview="", vote_average=0, movie, overview_visibility=true}) {
+export default function Post({title, id, popularity=0, release_date="", poster_path, overview="", vote_average=0, movie, overview_visibility=true}) {
     const [sinopisFlag, setSinopsisFlag] = useState(false);
     const [, setWatchList] = useContext(WatchListContext);
     
@@ -15,7 +16,7 @@ export default function Post({title, popularity=0, release_date="", poster_path,
         <div className="border shadow bg-light rounded ">
                 <div className={title.length<20?"title-normal":"title-long"} style={{minHeight:"5vw"}}>
                     <hr></hr>
-                    <b>{title}</b>
+                <Link to={`/movie/${id}`} style={{textDecoration:"none"}}><b>{title}</b> </Link>
                     <hr></hr>
                 </div>
                 <div className="cont-ku border shadow-lg">

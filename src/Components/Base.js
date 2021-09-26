@@ -6,8 +6,6 @@ import { WatchListContext } from '../WatchListContext';
 import WatchList from './WatchList';
 import PageNavbar from './PageNavbar';
 import CstmTab from './CstmTab';
-import { Col, Spinner } from 'reactstrap';
-import { Textfit } from 'react-textfit';
 
 const API_Key = "1928eb3e6da4e780ca9119f98a6ec513";
 const session_id = "de0dd5cc04b5390af28c4db2fd4a63586c9088e4";
@@ -43,12 +41,13 @@ export default function Base() {
     const [updatedWatchListStatus, setUpdatedWatchListStatus] = useState ([]);
 
     const [activeTab, setActiveTab] = useState('1');
-    const [loading, setLoading] = useState (false);
+    const [, setLoading] = useState (false);
     
     const popularMovieContent = 
                                 post.map(p=>(
                                     <div className="col-4 pt-4">
                                         <Post title={p.title}
+                                        id={p.id}
                                         popularity={p.popularity}
                                         release_date={p.release_date}
                                         overview={p.overview}
@@ -62,6 +61,7 @@ export default function Base() {
                             topPost.map(tp=>(
                                 <div className="col-4 pt-4">
                                     <Post title={tp.title}
+                                    Key={tp.id}
                                     popularity={tp.popularity}
                                     release_date={tp.release_date}
                                     overview={tp.overview}
@@ -88,6 +88,8 @@ export default function Base() {
                 }
                 break;
             }
+            default : 
+                break;
         }
     }
     const prevPage = () => {
@@ -107,6 +109,8 @@ export default function Base() {
                 }
                 break;
             }
+            default : 
+                break;
         }
     }
 
@@ -162,7 +166,7 @@ export default function Base() {
             <div className="col">
                 <div className="row" style={{paddingTop:"8vw"}}>
                 <div className="col-8" style={{backgroundImage: "linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)", height:"38vw"}}>
-                    <img style={backdropStyle}  className="shadow-lg" src={`https://image.tmdb.org/t/p/original/${backDrop}`} alt="" />
+                    <img style={backdropStyle}  className="shadow-lg" src={`https://image.tmdb.org/t/p/original/${backDrop}`} alt="back drop film" />
                 </div>
                 <div className="col-4 px-5 d-flex" style={{backgroundImage: "linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)",color:"white", height:"38vw"}}>
                     <div className="align-self-center">
@@ -180,7 +184,8 @@ export default function Base() {
                     <div className="col-4" style={{paddingLeft:"5%", paddingRight:"5%"}}>
                         <h1>Watchlist</h1>
                      {watchListTotal.map(w=>(
-                            <WatchList title={w.title} 
+                            <WatchList title={w.title}
+                                key={w.id}
                                 release_date={w.release_date} 
                                 poster_path={w.poster_path}
                                 movie={w}

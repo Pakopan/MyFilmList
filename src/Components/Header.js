@@ -6,7 +6,7 @@ import { Search } from 'react-bootstrap-icons'
 
 export default function Header() {
     const [keyword, setKeyword] = useState("");
-    const [searchValue, setSearchValue] = useContext(SearchBarContext);
+    const [, setSearchValue] = useContext(SearchBarContext);
 
     const updateKeyword = (event) => setKeyword(event.target.value);
     const updateSearchValue = () => setSearchValue(keyword);

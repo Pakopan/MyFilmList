@@ -30,13 +30,9 @@ export default function UpcomingMovie() {
     }
 
     useEffect (()=>{
-        axios.get(url).then((response)=>{setUpcomingMovie(response.data.results)});
-    },[url]);
-
-    useEffect(()=>{
         axios.get(url).then((response)=>setTotalPages(response.data.total_pages));
         axios.get(url).then((response)=>{setUpcomingMovie(response.data.results)});
-    },[]);
+    },[url]);
 
     return (
         <div>
@@ -51,6 +47,7 @@ export default function UpcomingMovie() {
                         <Post title={um.title}
                         poster_path={um.poster_path}
                         movie={um}
+                        id={um.id}
                         overview_visibility={false}/>
                     </div>
                     <div className="col-6 align-self-start">

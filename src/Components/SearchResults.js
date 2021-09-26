@@ -43,6 +43,7 @@ export default function SearchResults({input=""}) {
             { searchResults.map(p=>(
                  <div className="col-3 pt-4">
                        <Post title={p.title}
+                       id={p.id}
                        popularity={p.popularity}
                        release_date={p.release_date}
                        overview={p.overview}
