@@ -50,3 +50,14 @@
 .iconSearchBar {
   color:#f7f7f7;
 }
+
+.menuButton {
+  border: 1px solid white;
+  border-radius: 5px;
+  margin-left: 20px;
+}
+
+.menuButton:hover {
+  background-color:#292b2c;
+  transition: 0.5s;
+}

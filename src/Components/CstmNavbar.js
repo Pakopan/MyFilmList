@@ -10,6 +10,8 @@ import {
   } from 'reactstrap';
   import { Link } from 'react-router-dom';
   import { Film } from 'react-bootstrap-icons';
+  import { PersonBadgeFill } from 'react-bootstrap-icons';
+  import { BinocularsFill } from 'react-bootstrap-icons';
 
 export default function CstmNavbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -28,14 +30,14 @@ export default function CstmNavbar() {
           <NavbarToggler onClick={toggle} />
           <Collapse className="col-1" isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
-              <NavItem>
+              <NavItem className="menuButton">
                 <Link to="/upcoming">
-                  <NavLink className="text-white">Upcoming Movie</NavLink>
+                  <NavLink className="text-white"><BinocularsFill size={25} color="white"/> Upcoming Movie</NavLink>
                 </Link>
               </NavItem>
               <Link to="/about">
-              <NavItem>
-                <NavLink className="text-white">About Me</NavLink>
+              <NavItem className="menuButton">
+                <NavLink className="text-white"><PersonBadgeFill size={25} color="white"/>About Me</NavLink>
               </NavItem>
               </Link>
             </Nav>
