@@ -31,7 +31,7 @@ export default function Base() {
 
     const [watchList] = useContext(WatchListContext);
 
-    const [backDrop, setBackdrop] = useState ("");
+    const [backDrop, setBackdrop] = useState ("/iTgM25ftE7YtFgZwUZupVp8A61S.jpg");
     const [titleBackdrop, setTitleBackdrop] = useState("");
     const [overviewBackdrop, setOverviewBackdrop] = useState("");
 
