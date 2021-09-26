@@ -6,6 +6,7 @@ import { WatchListContext } from '../WatchListContext';
 import WatchList from './WatchList';
 import PageNavbar from './PageNavbar';
 import CstmTab from './CstmTab';
+import { Spinner } from 'reactstrap';
 
 const API_Key = "1928eb3e6da4e780ca9119f98a6ec513";
 const session_id = "de0dd5cc04b5390af28c4db2fd4a63586c9088e4";
@@ -41,7 +42,7 @@ export default function Base() {
     const [updatedWatchListStatus, setUpdatedWatchListStatus] = useState ([]);
 
     const [activeTab, setActiveTab] = useState('1');
-    const [, setLoading] = useState (false);
+    const [loading, setLoading] = useState (false);
     
     const popularMovieContent = 
                                 post.map(p=>(
@@ -196,6 +197,7 @@ export default function Base() {
                                 watchListPostURL = {watchListPostURL}
                                 />
                         ))}
+                        <Spinner className={loading?"visible":"invisible"} color="primary" children="" style={{ width: '3rem', height: '3rem' }} />
                     </div>
                     <div className="col-8" style={{paddingRight:"2%", paddingLeft:"0"}}>
                         <CstmTab activeTab={activeTab} toggle={toggle}
