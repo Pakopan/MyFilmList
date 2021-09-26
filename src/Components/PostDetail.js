@@ -1,6 +1,5 @@
 import React,{useEffect, useState} from 'react'
 import axios from 'axios';
-import { Justify } from 'react-bootstrap-icons';
 
 
 const API_Key = "1928eb3e6da4e780ca9119f98a6ec513";
@@ -25,7 +24,7 @@ export default function PostDetail({match}) {
         axios.get(reviewURL).then(response=>(setReview(response.data.results)))
     },[baseURL, reviewURL])
     return (
-        <div /*style={{backgroundImage:`url(${`https://image.tmdb.org/t/p/original/${detail.backdrop_path}`})`, minHeight:"768px"}}*/>
+        <div style={{backgroundImage:`url(${`https://image.tmdb.org/t/p/original/${detail.backdrop_path}`})`, minHeight:"768px"}}>
             <div className="row" style={{paddingTop:"10vw"}}></div>
             <div className="row border shadow bg-light rounded p-5 mx-5">  
                 <div className="col-6">
@@ -39,12 +38,16 @@ export default function PostDetail({match}) {
                 </div>
                 <div className="row mt-5">
                 <h2 className="text-primary">Review</h2>
-                {review.map((r)=>(
-                            <div className="col-6">
-                                <p><b>{r.author}</b></p>
-                                <p style={{textAlign:"justify"}}>{r.content}</p>
-                            </div>
-                        ))}
+                {
+                review.length==0?()=>(<p>---tidak ada review---</p>):
+                    review.map((r)=>(
+                                <div className="col-6">
+                                    <p><b>{r.author}</b></p>
+                                    <p style={{textAlign:"justify"}}>{r.content}</p>
+                                </div>
+                            ))
+                        
+                }
                 </div>
                 </div>
         </div>

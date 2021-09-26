@@ -61,7 +61,7 @@ export default function Base() {
                             topPost.map(tp=>(
                                 <div className="col-4 pt-4">
                                     <Post title={tp.title}
-                                    Key={tp.id}
+                                    id={tp.id}
                                     popularity={tp.popularity}
                                     release_date={tp.release_date}
                                     overview={tp.overview}
