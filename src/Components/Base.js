@@ -54,7 +54,6 @@ export default function Base() {
                                         overview={p.overview}
                                         vote_average={p.vote_average}
                                         poster_path={p.poster_path}
-                                        movie={p}
                                         />
                                     </div>
                                 ));
@@ -68,7 +67,6 @@ export default function Base() {
                                     overview={tp.overview}
                                     vote_average={tp.vote_average}
                                     poster_path={tp.poster_path}
-                                    movie={tp}
                                     />
                                 </div>
                             ));

@@ -48,8 +48,7 @@ export default function SearchResults({input=""}) {
                        release_date={p.release_date}
                        overview={p.overview}
                        vote_average={p.vote_average}
-                       poster_path={p.poster_path}
-                       movie={p}/>
+                       poster_path={p.poster_path}/>
                 </div>))
             }
             </div>

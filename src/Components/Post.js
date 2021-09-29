@@ -17,7 +17,7 @@ const session_id = "de0dd5cc04b5390af28c4db2fd4a63586c9088e4";
 const account_id = "11148819";
 const FavoritePostURL = `https://api.themoviedb.org/3/account/${account_id}/favorite?api_key=${API_Key}&session_id=${session_id}`
 
-export default function Post({title, id, popularity=0, release_date="", poster_path, overview="", vote_average=0, movie, overview_visibility=true}) {
+export default function Post({title, id, popularity=0, release_date="", poster_path, overview="", vote_average=0, overview_visibility=true}) {
     const [sinopisFlag, setSinopsisFlag] = useState(false);
     const [isFavorite, setIsFavorite] = useState (false);
 
@@ -26,23 +26,22 @@ export default function Post({title, id, popularity=0, release_date="", poster_p
     const [totalFavorite,] = useContext(FavoriteTotalContext);
     const [,setUpdatedFavoriteStatus] = useContext(UpdatedFavoriteStatusContext);
     
-    const addToWatchList = () => setWatchList(prev=>[...prev,movie.id]);
+    const addToWatchList = () => setWatchList(prev=>[...prev, id]);
     const addToFavorite = () => {
-        if (isFavorite===false)setFavorite(prevFav=>[...prevFav, movie.id]);
+        if (isFavorite===false)setFavorite(prevFav=>[...prevFav, id]);
         else {
             axios.post(FavoritePostURL,
                 {
                     media_type: "movie",
-                    media_id : parseInt(movie.id),
+                    media_id : parseInt(id),
                     favorite: false
                 }
             ).then(response=>{setUpdatedFavoriteStatus(a=>[...a,response.data])});
 
             setFavorite(favorite.filter((fav)=>(fav !== id)));
-           // setIsFavorite(false);
         }
     }
-    
+
     let totalFavoriteId=[];
     useEffect(()=>{
         totalFavorite.forEach((tf)=>{
