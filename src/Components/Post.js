@@ -1,14 +1,57 @@
-import React,{useState, useContext} from 'react'
+import React,{useState, useContext, useEffect} from 'react'
 import { Collapse } from 'reactstrap';
+
 import {StarFill} from 'react-bootstrap-icons';
-import { WatchListContext } from '../WatchListContext';
 import { Link } from 'react-router-dom';
+import { BookmarkStarFill } from 'react-bootstrap-icons';
+
+import { WatchListContext } from '../WatchListContext';
+import { FavoriteContext } from '../FavoriteContext';
+import { FavoriteTotalContext } from '../FavoriteTotalContext';
+import { UpdatedFavoriteStatusContext } from '../UpdatedFavoriteStatusContext';
+
+import axios from 'axios';
+
+const API_Key = "1928eb3e6da4e780ca9119f98a6ec513";
+const session_id = "de0dd5cc04b5390af28c4db2fd4a63586c9088e4";
+const account_id = "11148819";
+const FavoritePostURL = `https://api.themoviedb.org/3/account/${account_id}/favorite?api_key=${API_Key}&session_id=${session_id}`
 
 export default function Post({title, id, popularity=0, release_date="", poster_path, overview="", vote_average=0, movie, overview_visibility=true}) {
     const [sinopisFlag, setSinopsisFlag] = useState(false);
-    const [, setWatchList] = useContext(WatchListContext);
+    const [isFavorite, setIsFavorite] = useState (false);
+
+    const [,setWatchList] = useContext(WatchListContext);
+    const [favorite, setFavorite] = useContext(FavoriteContext);
+    const [totalFavorite,] = useContext(FavoriteTotalContext);
+    const [,setUpdatedFavoriteStatus] = useContext(UpdatedFavoriteStatusContext);
     
     const addToWatchList = () => setWatchList(prev=>[...prev,movie.id]);
+    const addToFavorite = () => {
+        if (isFavorite===false)setFavorite(prevFav=>[...prevFav, movie.id]);
+        else {
+            axios.post(FavoritePostURL,
+                {
+                    media_type: "movie",
+                    media_id : parseInt(movie.id),
+                    favorite: false
+                }
+            ).then(response=>{setUpdatedFavoriteStatus(a=>[...a,response.data])});
+
+            setFavorite(favorite.filter((fav)=>(fav !== id)));
+           // setIsFavorite(false);
+        }
+    }
+    
+    let totalFavoriteId=[];
+    useEffect(()=>{
+        totalFavorite.forEach((tf)=>{
+            totalFavoriteId=[...totalFavoriteId,tf.id];
+        })
+        if (totalFavoriteId.includes(id)) setIsFavorite(true);
+        else setIsFavorite(false);
+    },[totalFavorite]);
+
 
     let overview2=[...overview];   
 
@@ -21,6 +64,8 @@ export default function Post({title, id, popularity=0, release_date="", poster_p
                 </div>
                 <div className="cont-ku border shadow-lg">
                     <button className="btn btn-primary btn-sm" id="watchlistBtn" onClick={addToWatchList}><b>+</b></button>
+                    <button className="btn btn-danger" id="favorite-btn" 
+                    onClick={addToFavorite}><BookmarkStarFill size={20} color={`${isFavorite?"yellow":"white"}`}/></button>
                     <img className={sinopisFlag?"sinopsis-on":""} src={`https://image.tmdb.org/t/p/w200/${poster_path}`} alt="poster film"/>
                   <Collapse className="sinopsis" isOpen={sinopisFlag}>
                         <p style={{fontSize:"small"}}>

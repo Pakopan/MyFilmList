@@ -61,3 +61,8 @@
   background-color:#292b2c;
   transition: 0.5s;
 }
+
+#favorite-btn{
+  position : absolute;
+  
+}

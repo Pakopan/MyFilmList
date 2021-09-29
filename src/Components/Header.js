@@ -15,10 +15,10 @@ export default function Header() {
            <div className="card border-0 shadow-lg position-fixed" style={{width:"100%", height:"8vw", zIndex:"1"}}>
                 <div className="row card-body d-flex mx-0"
                     style={{backgroundImage: "linear-gradient(to right, #0250c5 0%, #d43f8d 100%)"}}>
-                    <div className="col-7 align-self-center">
+                    <div className="col-8 align-self-center">
                         <CstmNavbar/>
                         </div>
-                        <div style={{zIndex:"1"}} className="col-5 align-self-center">
+                        <div style={{zIndex:"1"}} className="col-4 align-self-center">
                         <form className="d-flex">
                             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" 
                                 value={keyword} onChange={updateKeyword}/>
