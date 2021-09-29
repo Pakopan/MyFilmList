@@ -31,7 +31,7 @@ export default function UpcomingMovie() {
 
     useEffect (()=>{
         axios.get(url).then((response)=>setTotalPages(response.data.total_pages));
-        axios.get(url).then((response)=>{setUpcomingMovie(response.data.results)});
+        axios.get(url).then((response)=>setUpcomingMovie(response.data.results));
     },[url]);
 
     return (

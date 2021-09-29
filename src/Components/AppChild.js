@@ -3,10 +3,12 @@ import {Switch, Route} from 'react-router-dom';
 import axios from 'axios';
 import UpcomingMovie from './UpcomingMovie';
 import Base from './Base';
-import { SearchBarContext } from '../SearchBarContext';
-import { FavoriteContext } from '../FavoriteContext';
-import { FavoriteTotalContext } from '../FavoriteTotalContext';
-import { UpdatedFavoriteStatusContext } from '../UpdatedFavoriteStatusContext';
+
+import { SearchBarContext } from './Context/SearchBarContext';
+import { FavoriteContext } from './Context/FavoriteContext';
+import { FavoriteTotalContext } from './Context/FavoriteTotalContext';
+import { UpdatedFavoriteStatusContext } from './Context/UpdatedFavoriteStatusContext';
+
 import SearchResults from './SearchResults';
 import About from './About';
 import PostDetail from './PostDetail';

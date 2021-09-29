@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import CstmNavbar from './CstmNavbar'
 import { Link } from 'react-router-dom'
-import { SearchBarContext } from '../SearchBarContext'
+import { SearchBarContext } from './Context/SearchBarContext'
 import { Search } from 'react-bootstrap-icons'
 
 export default function Header() {

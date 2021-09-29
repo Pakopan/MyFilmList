@@ -2,7 +2,12 @@ import React,{useEffect, useState, useContext} from 'react'
 import axios from 'axios'
 
 import Post from './Post';
-import { WatchListContext } from '../WatchListContext';
+
+import { WatchListContext } from './Context/WatchListContext';
+import { UpdatedWatchlistStatusContext } from './Context/UpdatedWatchlistStatusContext';
+import { AddedWatchlistStatusContext } from './Context/AddedWatchlistStatus';
+import  { WatchListTotalContext } from './Context/WatchListTotalContext';
+
 import WatchList from './WatchList';
 import PageNavbar from './PageNavbar';
 import CstmTab from './CstmTab';
@@ -32,14 +37,14 @@ export default function Base() {
 
     const [watchList] = useContext(WatchListContext);
 
-    const [backDrop, setBackdrop] = useState ("/iTgM25ftE7YtFgZwUZupVp8A61S.jpg");
+    const [backDrop, setBackdrop] = useState ("/");
     const [titleBackdrop, setTitleBackdrop] = useState("");
     const [overviewBackdrop, setOverviewBackdrop] = useState("");
 
-    const [watchListTotal, setWatchListTotal] = useState([]);
+    const [watchListTotal, setWatchListTotal] = useContext(WatchListTotalContext);
     
-    const [addedWatchListStatus, setAddedWatchListStatus] = useState([]);
-    const [updatedWatchListStatus, setUpdatedWatchListStatus] = useState ([]);
+    const [addedWatchListStatus, setAddedWatchListStatus] = useContext(AddedWatchlistStatusContext);
+    const [updatedWatchListStatus,] = useContext (UpdatedWatchlistStatusContext);
 
     const [activeTab, setActiveTab] = useState('1');
     const [loading, setLoading] = useState (false);
@@ -188,10 +193,6 @@ export default function Base() {
                                 release_date={w.release_date} 
                                 poster_path={w.poster_path}
                                 movie={w}
-                                watchListTotal={watchListTotal}
-                                setWatchListTotal={setWatchListTotal}
-                                updatedWatchListStatus={updatedWatchListStatus}
-                                setupdatedWatchListStatus = {setUpdatedWatchListStatus}
                                 watchListPostURL = {watchListPostURL}
                                 />
                         ))}

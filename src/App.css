@@ -1,3 +1,10 @@
+*{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none; /*firefox*/
+}
+*::-webkit-scrollbar {
+  display: none;
+}
 .App {
   font-family: 'Roboto', sans-serif;
   text-align: center;
