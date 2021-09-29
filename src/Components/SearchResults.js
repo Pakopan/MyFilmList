@@ -35,12 +35,11 @@ export default function SearchResults({input=""}) {
     },[input, searchURL, page])
 
     return (
-        <div>
+        <div className="d-flex" style={{alignContent:"center", justifyContent:"center"}}>
             <PageNavbar pageNumber={page} onClickNextPage={nextPage} onClickPrevPage={prevPage} pageTotal={totalPages}/>
-            <div className="container overflow-hidden">
-            <div className="row" style={{paddingTop:"8vw"}}>
+            <div className="row" style={{paddingTop:"8vw", width:"80vw"}}>
             <h1 style={{paddingBottom:"2vw", paddingTop:"3vw"}}>Hasil pencarian "{input}"</h1>
-            { searchResults.map(p=>(
+            {searchResults.map(p=>(
                  <div className="col-3 pt-4">
                        <Post title={p.title}
                        id={p.id}
@@ -51,7 +50,6 @@ export default function SearchResults({input=""}) {
                        poster_path={p.poster_path}/>
                 </div>))
             }
-            </div>
             </div>
         </div>
     )

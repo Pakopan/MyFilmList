@@ -1,8 +1,6 @@
 import React,{useEffect, useState, useContext} from 'react'
 import axios from 'axios'
 
-import Post from './Post';
-
 import { WatchListContext } from './Context/WatchListContext';
 import { UpdatedWatchlistStatusContext } from './Context/UpdatedWatchlistStatusContext';
 import { AddedWatchlistStatusContext } from './Context/AddedWatchlistStatus';
@@ -12,6 +10,7 @@ import WatchList from './WatchList';
 import PageNavbar from './PageNavbar';
 import CstmTab from './CstmTab';
 import { Spinner } from 'reactstrap';
+import Post from './Post';
 
 const API_Key = "1928eb3e6da4e780ca9119f98a6ec513";
 const session_id = "de0dd5cc04b5390af28c4db2fd4a63586c9088e4";

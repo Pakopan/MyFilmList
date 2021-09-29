@@ -45,8 +45,8 @@ export default function Post({title, id, popularity=0,
         }
     }
 
-    let totalFavoriteId=[];
     useEffect(()=>{
+        let totalFavoriteId=[];
         totalFavorite.forEach((tf)=>{
             totalFavoriteId=[...totalFavoriteId,tf.id];
         })
