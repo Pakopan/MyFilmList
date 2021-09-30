@@ -1,7 +1,6 @@
 import React,{useContext} from 'react'
 import axios from 'axios';
-import { WatchListContext } from './Context/WatchListContext';
-import { UpdatedWatchlistStatusContext } from './Context/UpdatedWatchlistStatusContext';
+import { WatchListContext, UpdatedWatchlistStatusContext } from './Context/WatchListContext';
 
 export default function WatchList({title, release_date,poster_path, 
                                 movie,watchListPostURL}) 

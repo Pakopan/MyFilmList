@@ -1,10 +1,12 @@
 import React,{useEffect, useState, useContext} from 'react'
 import axios from 'axios'
 
-import { WatchListContext } from './Context/WatchListContext';
-import { UpdatedWatchlistStatusContext } from './Context/UpdatedWatchlistStatusContext';
-import { AddedWatchlistStatusContext } from './Context/AddedWatchlistStatus';
-import  { WatchListTotalContext } from './Context/WatchListTotalContext';
+import { WatchListContext, WatchListTotalContext,
+        UpdatedWatchlistStatusContext, AddedWatchlistStatusContext,
+    } from './Context/WatchListContext';
+
+import { useGetWatchListTotal } from './Context/WatchListContext';
+import { watchListPostURL } from './Context/WatchListContext';
 
 import WatchList from './WatchList';
 import PageNavbar from './PageNavbar';
@@ -14,12 +16,6 @@ import Post from './Post';
 import LoadingPage from './LoadingPage';
 
 const API_Key = "1928eb3e6da4e780ca9119f98a6ec513";
-const session_id = "de0dd5cc04b5390af28c4db2fd4a63586c9088e4";
-const account_id = "11148819";
-
-const watchListPostURL = `https://api.themoviedb.org/3/account/${account_id}/watchlist?api_key=${API_Key}&session_id=${session_id}`
-const watchListURL = `https://api.themoviedb.org/3/account/${account_id}/watchlist/movies?api_key=${API_Key}&session_id=${session_id}&language=en-US&sort_by=created_at.asc&page=1`
-
 export default function Base() {
     const baseURL = (key, page_number=1, apikey=API_Key) => `https://api.themoviedb.org/3/movie/${key}?api_key=${apikey}&language=en-US&page=${page_number}`;
     const [page, setPage] = useState(()=>1);
@@ -31,18 +27,15 @@ export default function Base() {
     const [url, setURL] = useState (baseURL("popular"));
     const [urlTopPost, setUrlTopPost] = useState (baseURL("top_rated"));
 
-
     const [totalPages, setTotalPages] = useState (()=>1);
     const [totalPagesTopPost, setTotalPageTopPost] = useState(()=>1);
-
-    const [watchList] = useContext(WatchListContext);
 
     const [backDrop, setBackdrop] = useState ("");
     const [titleBackdrop, setTitleBackdrop] = useState("");
     const [overviewBackdrop, setOverviewBackdrop] = useState("");
-
-    const [watchListTotal, setWatchListTotal] = useContext(WatchListTotalContext);
     
+    const [watchList] = useContext(WatchListContext);
+    const [watchListTotal] = useContext(WatchListTotalContext);
     const [addedWatchListStatus, setAddedWatchListStatus] = useContext(AddedWatchlistStatusContext);
     const [updatedWatchListStatus,] = useContext (UpdatedWatchlistStatusContext);
 
@@ -50,6 +43,8 @@ export default function Base() {
     const [loading, setLoading] = useState (false);
     const [isPageLoading, setIsPageLoading] = useState (true);
     
+    const getWatchListTotal=useGetWatchListTotal();
+
     const popularMovieContent = 
                                 post.map(p=>(
                                     <div className="col-4 pt-4">
@@ -157,14 +152,12 @@ export default function Base() {
     },[watchList]);
 
     useEffect(()=>{
-        if (addedWatchListStatus.success) //utk menghindari asycn gagal post ke server
-            axios.get(watchListURL).then((response)=>setWatchListTotal(response.data.results));
+        if (addedWatchListStatus.success) getWatchListTotal();
         setLoading(false);
     },[addedWatchListStatus]);
 
     useEffect(()=>{
-        if (updatedWatchListStatus.success) //utk menghindari async gagal post ke server
-            axios.get(watchListURL).then((response)=>setWatchListTotal(response.data.results));
+        if (updatedWatchListStatus.success) getWatchListTotal();
         setLoading(false)
     },[updatedWatchListStatus]);
 

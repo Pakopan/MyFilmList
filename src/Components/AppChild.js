@@ -5,26 +5,21 @@ import UpcomingMovie from './UpcomingMovie';
 import Base from './Base';
 
 import { SearchBarContext } from './Context/SearchBarContext';
-import { FavoriteContext } from './Context/FavoriteContext';
-import { FavoriteTotalContext } from './Context/FavoriteTotalContext';
-import { UpdatedFavoriteStatusContext } from './Context/UpdatedFavoriteStatusContext';
+import { FavoriteContext, FavoritePostURL,
+        UpdatedFavoriteStatusContext, useGetFavoriteTotal
+     } from './Context/FavoriteContext';
 
 import SearchResults from './SearchResults';
 import About from './About';
 import PostDetail from './PostDetail';
 import MySpace from './MySpace';
 
-const API_Key = "1928eb3e6da4e780ca9119f98a6ec513";
-const session_id = "de0dd5cc04b5390af28c4db2fd4a63586c9088e4";
-const account_id = "11148819";
-const FavoritePostURL = `https://api.themoviedb.org/3/account/${account_id}/favorite?api_key=${API_Key}&session_id=${session_id}`
-const FavoriteURL = `https://api.themoviedb.org/3/account/${account_id}/favorite/movies?api_key=${API_Key}&session_id=${session_id}&language=en-US&sort_by=created_at.asc&page=1`
-
 export default function AppChild() {
     const [favorite,] = useContext(FavoriteContext);
-    const [,setTotalFavorite] = useContext(FavoriteTotalContext);
     const [addedFavoriteStatus, setAddedFavoriteStatus] = useState ({success:true});
     const [updatedFavoriteStatus,] = useContext(UpdatedFavoriteStatusContext);
+
+    const getFavoriteTotal = useGetFavoriteTotal();
     
     useEffect(()=>{
         if (favorite!==[]){
@@ -44,15 +39,12 @@ export default function AppChild() {
     },[favorite]);
 
     useEffect(()=>{
-        if (addedFavoriteStatus.success) //utk menghindari asycn gagal post ke server
-            axios.get(FavoriteURL).then((response)=>{setTotalFavorite(response.data.results)});
+        if (addedFavoriteStatus.success) getFavoriteTotal();
     },[addedFavoriteStatus]);
 
     useEffect(()=>{
-        if (updatedFavoriteStatus.success) //utk menghindari async gagal post ke server
-            axios.get(FavoriteURL).then((response)=>setTotalFavorite(response.data.results));
+        if (updatedFavoriteStatus.success) getFavoriteTotal();
     },[updatedFavoriteStatus]);
-
 
     const [searchValue] = useContext(SearchBarContext);
     return (

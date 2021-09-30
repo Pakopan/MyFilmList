@@ -1,14 +1,10 @@
 import React,{useEffect, useState} from 'react';
 import axios from 'axios';
-import { TagsFill } from 'react-bootstrap-icons';
-import { CalendarFill } from 'react-bootstrap-icons';
-import { Megaphone } from 'react-bootstrap-icons';
-import { StarFill } from 'react-bootstrap-icons';
-import { PeopleFill } from 'react-bootstrap-icons';
+import { TagsFill, CalendarFill, Megaphone, StarFill, PeopleFill  } from 'react-bootstrap-icons';
 import { UncontrolledCollapse, Card, CardBody } from 'reactstrap';
+import LoadingPage from './LoadingPage';
+
 const API_Key = "1928eb3e6da4e780ca9119f98a6ec513";
-
-
 export default function PostDetail({match}) {
     const reviewURL = `https://api.themoviedb.org/3/movie/${match.params.id}/reviews?api_key=${API_Key}&language=en-US&page=1`
     const baseURL = `https://api.themoviedb.org/3/movie/${match.params.id}?api_key=${API_Key}&language=en-US`
@@ -26,15 +22,26 @@ export default function PostDetail({match}) {
             popularity:"-",
             vote_count:"-",
         });
-
     const [review, setReview] = useState([]);
     const [video, setVideo] = useState ("");
+    const [isPageLoading, setIsLoadingPage] = useState(true);
+
     useEffect(()=>{
-        axios.get(baseURL).then(response=>(setDetail(response.data)));;
-        axios.get(reviewURL).then(response=>(setReview(response.data.results)));
-        axios.get(videoURL).then(response=>(setVideo(response.data.results[0].key)));
+        axios.get(baseURL).then(response=>{
+            setDetail(response.data);
+        });;
+        axios.get(reviewURL).then(response=>{
+            setReview(response.data.results)
+            
+        });
+        axios.get(videoURL).then(response=>{
+            setVideo(response.data.results[0].key);
+            setIsLoadingPage(false); 
+        });
     },[baseURL, reviewURL, videoURL])
-    return (
+
+    if (isPageLoading) return <LoadingPage/>
+    else return (
         <div style={{backgroundImage:`url(${`https://image.tmdb.org/t/p/original/${detail.backdrop_path}`})`, minHeight:"768px"}}>
             <div className="row" style={{paddingTop:"10vw"}}></div>
             <div className="row border shadow bg-light rounded p-5 mx-5">  

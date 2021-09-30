@@ -1,7 +1,6 @@
 import React from 'react'
 import { UncontrolledCollapse, Card, CardBody, Button} from 'reactstrap';
-import { ArrowRightCircleFill } from 'react-bootstrap-icons';
-import { ArrowLeftCircleFill } from 'react-bootstrap-icons';
+import { ArrowRightCircleFill, ArrowLeftCircleFill } from 'react-bootstrap-icons';
 
 const headerStyle ={
     width: "8vw", 

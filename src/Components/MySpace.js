@@ -1,33 +1,29 @@
 import React,{useEffect, useContext} from 'react'
 import WatchList from './WatchList';
-import axios from 'axios'
 
-import { UpdatedWatchlistStatusContext } from './Context/UpdatedWatchlistStatusContext';
-import { AddedWatchlistStatusContext } from './Context/AddedWatchlistStatus';
-import { FavoriteTotalContext } from './Context/FavoriteTotalContext';
-import { WatchListTotalContext } from './Context/WatchListTotalContext';
+import { FavoriteTotalContext } from './Context/FavoriteContext';
+
+import { WatchListTotalContext, UpdatedWatchlistStatusContext, 
+    AddedWatchlistStatusContext, useGetWatchListTotal,
+    watchListPostURL } from './Context/WatchListContext';
+
 import Post from './Post';
 
-const API_Key = "1928eb3e6da4e780ca9119f98a6ec513";
-const session_id = "de0dd5cc04b5390af28c4db2fd4a63586c9088e4";
-const account_id = "11148819";
-const watchListPostURL = `https://api.themoviedb.org/3/account/${account_id}/watchlist?api_key=${API_Key}&session_id=${session_id}`
-const watchListURL = `https://api.themoviedb.org/3/account/${account_id}/watchlist/movies?api_key=${API_Key}&session_id=${session_id}&language=en-US&sort_by=created_at.asc&page=1`
-
 export default function MySpace() {
-    const [totalWatchList, setTotalWatchList] = useContext(WatchListTotalContext)
-    const [totalFavorite,] = useContext(FavoriteTotalContext);
-    const [updatedWatchListStatus,] = useContext(UpdatedWatchlistStatusContext);
-    const [addedWatchListStatus,] = useContext(AddedWatchlistStatusContext);
+    const [totalFavorite] = useContext(FavoriteTotalContext);
+
+    const [totalWatchList] = useContext(WatchListTotalContext);
+    const [updatedWatchListStatus] = useContext(UpdatedWatchlistStatusContext);
+    const [addedWatchListStatus] = useContext(AddedWatchlistStatusContext);
+
+    const getWatchListTotal = useGetWatchListTotal();
 
     useEffect(()=>{
-        if (addedWatchListStatus.success) //utk menghindari asycn gagal post ke server
-            axios.get(watchListURL).then((response)=>setTotalWatchList(response.data.results));
+        if (addedWatchListStatus.success) getWatchListTotal();
     },[addedWatchListStatus]);
 
     useEffect(()=>{
-        if (updatedWatchListStatus.success) //utk menghindari async gagal post ke server
-            axios.get(watchListURL).then((response)=>setTotalWatchList(response.data.results));
+        if (updatedWatchListStatus.success) getWatchListTotal();
     },[updatedWatchListStatus]);
 
     return (

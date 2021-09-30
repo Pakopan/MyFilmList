@@ -15,7 +15,6 @@ export default function SearchResults({input=""}) {
     const [searchURL, setSearchURL] = useState (URL(input));
     const [isPageLoading, setIsPageLoading] = useState (true);
     
-
     const nextPage = () => {
         if (page<totalPages) {
             setPage(prev=>(prev+1));

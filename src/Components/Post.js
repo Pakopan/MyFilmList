@@ -1,21 +1,13 @@
 import React,{useState, useContext, useEffect} from 'react'
 import { Collapse } from 'reactstrap';
-
-import {StarFill} from 'react-bootstrap-icons';
-import { Link } from 'react-router-dom';
-import { BookmarkStarFill } from 'react-bootstrap-icons';
-
-import { WatchListContext } from './Context/WatchListContext';
-import { FavoriteContext } from './Context/FavoriteContext';
-import { FavoriteTotalContext } from './Context/FavoriteTotalContext';
-import { UpdatedFavoriteStatusContext } from './Context/UpdatedFavoriteStatusContext';
-
 import axios from 'axios';
 
-const API_Key = "1928eb3e6da4e780ca9119f98a6ec513";
-const session_id = "de0dd5cc04b5390af28c4db2fd4a63586c9088e4";
-const account_id = "11148819";
-const FavoritePostURL = `https://api.themoviedb.org/3/account/${account_id}/favorite?api_key=${API_Key}&session_id=${session_id}`
+import {StarFill, BookmarkStarFill} from 'react-bootstrap-icons';
+import { Link } from 'react-router-dom';
+
+import { WatchListContext } from './Context/WatchListContext';
+import { FavoriteContext, FavoriteTotalContext, 
+        UpdatedFavoriteStatusContext, FavoritePostURL } from './Context/FavoriteContext';
 
 export default function Post({title, id, popularity=0, 
     release_date="", poster_path, overview="", vote_average=0, 

@@ -1,16 +1,7 @@
 import React from 'react';
-import {
-    Navbar,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink,
-  } from 'reactstrap';
-  import { Link } from 'react-router-dom';
-  import { Film } from 'react-bootstrap-icons';
-  import { PersonBadgeFill } from 'react-bootstrap-icons';
-  import { BinocularsFill } from 'react-bootstrap-icons';
-  import { ArchiveFill } from 'react-bootstrap-icons';
+import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { PersonBadgeFill, ArchiveFill, BinocularsFill, Film } from 'react-bootstrap-icons';
+import { Link } from 'react-router-dom';
 
 export default function CstmNavbar() {
 
