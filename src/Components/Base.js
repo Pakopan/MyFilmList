@@ -149,7 +149,7 @@ export default function Base() {
                         watchlist: true
                     }
                 ).then(response=>{
-                    setAddedWatchListStatus(a=>[...a,response.data]);
+                    setAddedWatchListStatus(response.data);
                 })
             ));
             setLoading(true);
@@ -157,17 +157,17 @@ export default function Base() {
     },[watchList]);
 
     useEffect(()=>{
-     //   if (addedWatchListStatus[addedWatchListStatus.length-1].success)
+        if (addedWatchListStatus.success) //utk menghindari asycn gagal post ke server
             axios.get(watchListURL).then((response)=>setWatchListTotal(response.data.results));
         setLoading(false);
-    },[addedWatchListStatus, updatedWatchListStatus]);
+    },[addedWatchListStatus]);
 
-    //styling------------------------------------
-    const backdropStyle = {
-            height: "100%",
-            width: "100%"
-    }
-    //----------------------------end of styling
+    useEffect(()=>{
+        if (updatedWatchListStatus.success) //utk menghindari async gagal post ke server
+            axios.get(watchListURL).then((response)=>setWatchListTotal(response.data.results));
+        setLoading(false)
+    },[updatedWatchListStatus]);
+
 
     if (isPageLoading) return <LoadingPage/>
     else return (
@@ -177,7 +177,7 @@ export default function Base() {
             <div className="col">
                 <div className="row" style={{paddingTop:"8vw"}}>
                 <div className="col-8" style={{backgroundImage: "linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)", height:"38vw"}}>
-                    <img style={backdropStyle}  className="shadow-lg" src={`https://image.tmdb.org/t/p/original/${backDrop}`} alt="back drop film" />
+                    <img style={{height:"100%", width:"100%"}}  className="shadow-lg" src={`https://image.tmdb.org/t/p/original/${backDrop}`} alt="back drop film" />
                 </div>
                 <div className="col-4 px-5 d-flex" style={{backgroundImage: "linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)",color:"white", height:"38vw"}}>
                     <div className="align-self-center">

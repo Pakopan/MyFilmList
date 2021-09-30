@@ -39,7 +39,7 @@ export default function Post({title, id, popularity=0,
                     media_id : parseInt(id),
                     favorite: false
                 }
-            ).then(response=>{setUpdatedFavoriteStatus(a=>[...a,response.data])});
+            ).then(response=>{setUpdatedFavoriteStatus(response.data)});
 
             setFavorite(favorite.filter((fav)=>(fav !== id)));
         }

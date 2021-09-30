@@ -23,7 +23,7 @@ const FavoriteURL = `https://api.themoviedb.org/3/account/${account_id}/favorite
 export default function AppChild() {
     const [favorite,] = useContext(FavoriteContext);
     const [,setTotalFavorite] = useContext(FavoriteTotalContext);
-    const [addedFavoriteStatus, setAddedFavoriteStatus] = useState ([]);
+    const [addedFavoriteStatus, setAddedFavoriteStatus] = useState ({success:true});
     const [updatedFavoriteStatus,] = useContext(UpdatedFavoriteStatusContext);
     
     useEffect(()=>{
@@ -36,15 +36,23 @@ export default function AppChild() {
                         favorite: true
                     }
                 ).then(response=>{
-                    setAddedFavoriteStatus(a=>[...a,response.data]);
+                  setAddedFavoriteStatus(response.data);
                 })
             ));
         }
+        
     },[favorite]);
 
     useEffect(()=>{
-        axios.get(FavoriteURL).then((response)=>setTotalFavorite(response.data.results));
-    },[addedFavoriteStatus, updatedFavoriteStatus]);
+        if (addedFavoriteStatus.success) //utk menghindari asycn gagal post ke server
+            axios.get(FavoriteURL).then((response)=>{setTotalFavorite(response.data.results)});
+    },[addedFavoriteStatus]);
+
+    useEffect(()=>{
+        if (updatedFavoriteStatus.success) //utk menghindari async gagal post ke server
+            axios.get(FavoriteURL).then((response)=>setTotalFavorite(response.data.results));
+    },[updatedFavoriteStatus]);
+
 
     const [searchValue] = useContext(SearchBarContext);
     return (

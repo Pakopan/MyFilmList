@@ -19,10 +19,16 @@ export default function MySpace() {
     const [totalFavorite,] = useContext(FavoriteTotalContext);
     const [updatedWatchListStatus,] = useContext(UpdatedWatchlistStatusContext);
     const [addedWatchListStatus,] = useContext(AddedWatchlistStatusContext);
-    
+
     useEffect(()=>{
-        axios.get(watchListURL).then((response)=>setTotalWatchList(response.data.results));
-    },[addedWatchListStatus, updatedWatchListStatus]);
+        if (addedWatchListStatus.success) //utk menghindari asycn gagal post ke server
+            axios.get(watchListURL).then((response)=>setTotalWatchList(response.data.results));
+    },[addedWatchListStatus]);
+
+    useEffect(()=>{
+        if (updatedWatchListStatus.success) //utk menghindari async gagal post ke server
+            axios.get(watchListURL).then((response)=>setTotalWatchList(response.data.results));
+    },[updatedWatchListStatus]);
 
     return (
         <div className="row" style={{justifyContent:"center", widht:"100vw", paddingTop:"10vw"}}>
