@@ -4,6 +4,7 @@ import axios from 'axios'
 import Post from './Post';
 import DetailMovie from './DetailMovie';
 import PageNavbar from './PageNavbar';
+import LoadingPage from './LoadingPage';
 
 const API_Key = "1928eb3e6da4e780ca9119f98a6ec513";
 
@@ -14,11 +15,13 @@ export default function UpcomingMovie() {
     const [url, setURL] = useState (()=>`${baseURL}1`);
     const [page, setPage] = useState (()=>1);
     const [totalPages, setTotalPages] = useState(()=>1);
+    const [isPageLoading, setisPageLoading] = useState (true);
 
     const nextPage = () => {
         if (page<totalPages) {
             setPage(prev=>(prev+1));
             setURL(`${baseURL}${page+1}`);
+            setisPageLoading(true);
         }
     }
 
@@ -26,15 +29,20 @@ export default function UpcomingMovie() {
         if (page>1){
             setPage(prev=>(prev-1));
             setURL(`${baseURL}${page-1}`);
+            setisPageLoading(true);
         }
     }
 
     useEffect (()=>{
         axios.get(url).then((response)=>setTotalPages(response.data.total_pages));
-        axios.get(url).then((response)=>setUpcomingMovie(response.data.results));
+        axios.get(url).then((response)=>{
+            setUpcomingMovie(response.data.results);
+            setisPageLoading(false);
+        });
     },[url]);
 
-    return (
+    if (isPageLoading) return <LoadingPage/>
+    else return (
         <div>
             <PageNavbar onClickNextPage={nextPage} onClickPrevPage={prevPage} pageNumber={page} pageTotal={totalPages}/>
             <div className="container overflow-hidden pt-5">

@@ -11,6 +11,7 @@ import PageNavbar from './PageNavbar';
 import CstmTab from './CstmTab';
 import { Spinner } from 'reactstrap';
 import Post from './Post';
+import LoadingPage from './LoadingPage';
 
 const API_Key = "1928eb3e6da4e780ca9119f98a6ec513";
 const session_id = "de0dd5cc04b5390af28c4db2fd4a63586c9088e4";
@@ -36,7 +37,7 @@ export default function Base() {
 
     const [watchList] = useContext(WatchListContext);
 
-    const [backDrop, setBackdrop] = useState ("/");
+    const [backDrop, setBackdrop] = useState ("");
     const [titleBackdrop, setTitleBackdrop] = useState("");
     const [overviewBackdrop, setOverviewBackdrop] = useState("");
 
@@ -47,6 +48,7 @@ export default function Base() {
 
     const [activeTab, setActiveTab] = useState('1');
     const [loading, setLoading] = useState (false);
+    const [isPageLoading, setIsPageLoading] = useState (true);
     
     const popularMovieContent = 
                                 post.map(p=>(
@@ -128,9 +130,12 @@ export default function Base() {
         axios.get(url).then((response)=>{setPost(response.data.results)});
         axios.get(urlTopPost).then((response)=>{setTopPost(response.data.results)});
 
-        axios.get(url).then((response)=>{setBackdrop(response.data.results[0].backdrop_path)});
         axios.get(url).then((response)=>{setTitleBackdrop(response.data.results[0].title)});
         axios.get(url).then((response)=>{setOverviewBackdrop(response.data.results[0].overview)});
+        axios.get(url).then((response)=>{
+            setBackdrop(response.data.results[0].backdrop_path);
+            setIsPageLoading(false);
+        });
     },[url, urlTopPost]);
 
 
@@ -152,7 +157,8 @@ export default function Base() {
     },[watchList]);
 
     useEffect(()=>{
-        axios.get(watchListURL).then((response)=>setWatchListTotal(response.data.results));
+     //   if (addedWatchListStatus[addedWatchListStatus.length-1].success)
+            axios.get(watchListURL).then((response)=>setWatchListTotal(response.data.results));
         setLoading(false);
     },[addedWatchListStatus, updatedWatchListStatus]);
 
@@ -162,7 +168,9 @@ export default function Base() {
             width: "100%"
     }
     //----------------------------end of styling
-    return (
+
+    if (isPageLoading) return <LoadingPage/>
+    else return (
         <div className="row p-0 m-0">
             <PageNavbar onClickNextPage={nextPage} onClickPrevPage={prevPage} pageNumber={activeTab==="1"?page:pageTopPost}
                     pageTotal={activeTab==="1"?totalPages:totalPagesTopPost}/>   
